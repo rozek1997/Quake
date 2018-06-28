@@ -29,19 +29,19 @@ public class MainActivity extends AppCompatActivity {
 
 
     private static final String USGS_REQUEST_URL =
-            "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=1&limit=500";
+            "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=1&limit=2000";
 
     private EarthquakeAdapter adapter;
     private View progressBar;
+    private ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ListView listView = (ListView) findViewById(R.id.list);
+        listView = (ListView) findViewById(R.id.list);
         listView.setVisibility(View.GONE);
         progressBar = findViewById(R.id.progress);
-        progressBar.setVisibility(View.VISIBLE);
         DownloadJson downloadJson = new DownloadJson();
         downloadJson.execute(USGS_REQUEST_URL);
         adapter = new EarthquakeAdapter(this, new ArrayList<Earthquake>());
@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        ListView listView = findViewById(R.id.list);
         listView.setVisibility(View.VISIBLE);
         adapter.clear();
         adapter.addAll(earthquakes);
@@ -77,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void earthquakesNotFounnd() {
-        ListView listView = findViewById(R.id.list);
         listView.setVisibility(View.GONE);
         TextView textView = findViewById(R.id.ifnotfound);
         textView.setVisibility(View.VISIBLE);
@@ -100,10 +98,13 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(ArrayList<Earthquake> earthquakes) {
-
             updateUI(earthquakes);
         }
 
+        @Override
+        protected void onPreExecute() {
+            progressBar.setVisibility(View.VISIBLE);
+        }
 
         public ArrayList<Earthquake> extractEarthquakes(String json) {
 
