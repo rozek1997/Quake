@@ -15,7 +15,7 @@ public class Earthquake {
         this.mag = mag;
         this.location = location;
         this.date = date;
-        this.urlAdress=urlAdress;
+        this.urlAdress = urlAdress;
     }
 
     public double getMag() {

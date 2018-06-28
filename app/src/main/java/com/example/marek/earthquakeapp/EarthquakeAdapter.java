@@ -32,32 +32,31 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        View view=convertView;
-        if(view==null)
-            view= LayoutInflater.from(getContext()).inflate(R.layout.quakeview, parent, false);
+        View view = convertView;
+        if (view == null)
+            view = LayoutInflater.from(getContext()).inflate(R.layout.quakeview, parent, false);
 
-        Earthquake earthquake=getItem(position);
+        Earthquake earthquake = getItem(position);
 
-        double mag=earthquake.getMag();
-        DecimalFormat decimalFormat=new DecimalFormat("0.0");
-        String output=decimalFormat.format(mag);
-        TextView magnitude=view.findViewById(R.id.magnitude);
+        double mag = earthquake.getMag();
+        DecimalFormat decimalFormat = new DecimalFormat("0.0");
+        String output = decimalFormat.format(mag);
+        TextView magnitude = view.findViewById(R.id.magnitude);
         GradientDrawable magnitudeCircle = (GradientDrawable) magnitude.getBackground();
         magnitude.setText(output);
         magnitudeCircle.setColor(magnitudeColor(mag));
 
-        TextView location=view.findViewById(R.id.preciselocation);
-        TextView location1=view.findViewById(R.id.country);
-        String preciseLocation="";
-        String country="";
-        if(earthquake.getLocation().contains(", ")){
-            String temp[]=earthquake.getLocation().split(", ");
-            preciseLocation=temp[0];
-            country=temp[1];
+        TextView location = view.findViewById(R.id.preciselocation);
+        TextView location1 = view.findViewById(R.id.country);
+        String preciseLocation = "";
+        String country = "";
+        if (earthquake.getLocation().contains(", ")) {
+            String temp[] = earthquake.getLocation().split(", ");
+            preciseLocation = temp[0];
+            country = temp[1];
             location.setText(preciseLocation);
             location1.setText(country);
-        }
-        else {
+        } else {
             preciseLocation = earthquake.getLocation();
             location1.setVisibility(View.GONE);
             location.setText(preciseLocation);
@@ -65,48 +64,49 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         }
 
 
-        Date dateObject=new Date(earthquake.getDate());
+        Date dateObject = new Date(earthquake.getDate());
         SimpleDateFormat df2 = new SimpleDateFormat("dd/MM/yy");
         String dateText = df2.format(dateObject);
-        TextView date=view.findViewById(R.id.date);
+        TextView date = view.findViewById(R.id.date);
 
         date.setText(dateText);
         return view;
     }
 
-    private int magnitudeColor(double mag){
+    private int magnitudeColor(double mag) {
 
-        int floorMag= ((int) Math.floor(mag));
+        int floorMag = ((int) Math.floor(mag));
         int color;
         switch (floorMag) {
             case 1:
-                color=R.color.magnitude1;
+                color = R.color.magnitude1;
                 break;
             case 2:
-                color=R.color.magnitude2;
+                color = R.color.magnitude2;
                 break;
             case 3:
-                color=R.color.magnitude3;
+                color = R.color.magnitude3;
                 break;
             case 4:
-                color=R.color.magnitude4;
+                color = R.color.magnitude4;
                 break;
             case 5:
-                color=R.color.magnitude5;
+                color = R.color.magnitude5;
                 break;
             case 6:
-                color=R.color.magnitude6;
+                color = R.color.magnitude6;
                 break;
             case 7:
-                color=R.color.magnitude7;
+                color = R.color.magnitude7;
                 break;
             case 8:
-                color=R.color.magnitude8;
+                color = R.color.magnitude8;
                 break;
             case 9:
-                color=R.color.magnitude9;
+                color = R.color.magnitude9;
                 break;
-                default:color=R.color.magnitude1;
+            default:
+                color = R.color.magnitude1;
 
         }
 
