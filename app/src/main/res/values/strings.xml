@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">EarthquakeApp</string>
+    <string name="app_name">Quake</string>
+    <!--Show after no earthquake was found -->
     <string name="earthquake_notfound">Earthquake not found</string>
 </resources>

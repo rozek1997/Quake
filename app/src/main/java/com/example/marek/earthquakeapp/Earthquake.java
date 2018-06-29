@@ -4,12 +4,15 @@ package com.example.marek.earthquakeapp;
  * Created by marek on 24.06.2018.
  */
 
+/**
+ * class store information about quake
+ */
 public class Earthquake {
 
-    private double mag;
-    private String location;
-    private long date;
-    private String urlAdress;
+    private double mag; //magnitude of quake
+    private String location; //location uf quake
+    private long date; //date od quake
+    private String urlAdress;  //urladress on web page with more information
 
     public Earthquake(double mag, String location, long date, String urlAdress) {
         this.mag = mag;

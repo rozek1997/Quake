@@ -35,6 +35,14 @@ public class MainActivity extends AppCompatActivity {
     private View progressBar;
     private ListView listView;
 
+    /**
+     * Loading activity_main layout, which contain list view, progressbar and textview
+     * Excecute background task downloadJson-downoalding rest from server
+     * Setting custom adapter for listview
+     * Setting onItemClickListener for listview
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +66,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Exceute after downloading thread, to show earthquake information
+     *
+     * @param earthquakes
+     */
     public void updateUI(ArrayList<Earthquake> earthquakes) {
         progressBar.setVisibility(View.GONE);
         if (earthquakes == null) {
@@ -75,6 +88,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * If lack of inforamtion due to downnloading error
+     * Hide list view and show error message
+     */
     public void earthquakesNotFounnd() {
         listView.setVisibility(View.GONE);
         TextView textView = findViewById(R.id.ifnotfound);
@@ -82,9 +99,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Downlloadin thread
+     * Return Arraylist of type Earthquake
+     *
+     */
     private class DownloadJson extends AsyncTask<String, Void, ArrayList<Earthquake>> {
 
 
+        /**
+         * Excecute as seperate thread
+         * @param urls
+         * @return Arraylist of Quakes
+         */
         @Override
         protected ArrayList<Earthquake> doInBackground(String... urls) {
             ArrayList<Earthquake> earthquakes = null;
@@ -96,16 +123,28 @@ public class MainActivity extends AppCompatActivity {
             return earthquakes;
         }
 
+        /**
+         * Excute after downloading is finished
+         * @param earthquakes
+         */
         @Override
         protected void onPostExecute(ArrayList<Earthquake> earthquakes) {
             updateUI(earthquakes);
         }
 
+        /**
+         * Exceute before doInBackground started
+         */
         @Override
         protected void onPreExecute() {
             progressBar.setVisibility(View.VISIBLE);
         }
 
+        /**
+         * Converting plain text from net to jsons in java
+         * @param json
+         * @return Arraylist of quakes
+         */
         public ArrayList<Earthquake> extractEarthquakes(String json) {
 
             if (json != "") {
@@ -122,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
 
                 } catch (JSONException e) {
 
-                    Log.e("QueryUtils", "Problem parsing the  JSON results", e);
+                    Log.e("Download JSON", "Problem parsing the  JSON results", e);
                 }
 
                 return earthquakes;
@@ -131,6 +170,12 @@ public class MainActivity extends AppCompatActivity {
             return null;
         }
 
+        /**
+         * connect to server for json information
+         * @param adress
+         * @return String plain text information received from server
+         * @throws IOException
+         */
         public String makeHttpRequest(String adress) throws IOException {
 
             HttpURLConnection urlConnection = null;
@@ -163,6 +208,11 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        /**
+         * Bufferd reding from server response
+         * @param inputStream
+         * @return plain text
+         */
         public String readFromStream(InputStream inputStream) {
             StringBuilder stringBuilder = new StringBuilder();
             if (inputStream != null) {
@@ -188,6 +238,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+        /**
+         * creating new url
+         * @param adress
+         * @return url object
+         */
         public URL createURL(String adress) {
             URL url;
             try {

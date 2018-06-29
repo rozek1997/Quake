@@ -21,6 +21,10 @@ import java.util.List;
  * Created by marek on 24.06.2018.
  */
 
+/**
+ * Custom adapter for showing new list of earthquakes
+ */
+
 public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
 
 
@@ -28,6 +32,14 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         super(context, 0, list);
     }
 
+    /**
+     * Overriden getView method to create new view in listview or recycle not used views
+     *
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -73,6 +85,10 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         return view;
     }
 
+    /**
+     * @param mag
+     * @return specified color depends of quake magnitude
+     */
     private int magnitudeColor(double mag) {
 
         int floorMag = ((int) Math.floor(mag));
@@ -106,10 +122,11 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
                 color = R.color.magnitude9;
                 break;
             default:
-                color = R.color.magnitude1;
+                color = R.color.magnitude3;
 
         }
 
+        //contextcompat safely return resource
         return ContextCompat.getColor(getContext(), color);
 
 
