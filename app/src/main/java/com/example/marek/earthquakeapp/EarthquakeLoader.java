@@ -34,9 +34,9 @@ public class EarthquakeLoader extends AsyncTaskLoader<List<Earthquake>> {
     @Override
     public List<Earthquake> loadInBackground() {
 
-        ArrayList<Earthquake> earthquakes=new ArrayList<>();
+        ArrayList<Earthquake> earthquakes=null;
         try {
-            earthquakes.=extractEarthquakes(makeHttpRequest(URL));
+            earthquakes=extractEarthquakes(makeHttpRequest(URL));
         } catch (IOException e) {
             e.printStackTrace();
         }
