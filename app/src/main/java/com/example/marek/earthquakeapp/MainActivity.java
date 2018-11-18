@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         listView = (ListView) findViewById(R.id.list);
         listView.setVisibility(View.GONE);
         progressBar = findViewById(R.id.progress);
+        progressBar.setVisibility(View.VISIBLE);
         getLoaderManager().initLoader(0, null, MainActivity.this).forceLoad();
         adapter = new EarthquakeAdapter(this, new ArrayList<Earthquake>());
         listView.setAdapter(adapter);
