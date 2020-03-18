@@ -15,8 +15,9 @@ Using Android concurrency to fetch data
 
 ### Main view with data
 
-![Main-view](https://drive.google.com/uc?export=view&id=1L_wvkvD9tJ0doYqhIi5mkEtuwYsAFBLp)
+![main-view](https://user-images.githubusercontent.com/38226876/76953105-6e58e680-690e-11ea-985f-b32e0dcf0707.jpg)
+
 
 ### Error loading data
 
-![Loading-page](https://drive.google.com/uc?export=view&id=1LW25w3tw19bLPUbObN3in2HYXeMTbcFD)
+![error_view](https://user-images.githubusercontent.com/38226876/76953124-7c0e6c00-690e-11ea-8812-c9f0dbcae2a5.jpg)
